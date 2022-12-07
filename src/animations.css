@@ -1,0 +1,53 @@
+
+@keyframes fadeOutUp{
+  0% {
+    bottom: 0px;
+    opactity: 1;
+  }
+  20% {
+    bottom: 10px;
+    opactity: 0.8;
+  }
+  80%{
+    bottom: 40px;
+    opactity: 0.2;
+  }
+  100%{
+    bottom: 50px;
+    opactity: 0;
+  }
+}
+
+@keyframes fadeInUp{
+  0% {
+    top: 50px;
+    opactity: 0;
+  }
+  20% {
+    top: 40px;
+    opactity: 0.2;
+  }
+  80%{
+    top: 10px;
+    opactity: 0.8;
+  }
+  100%{
+    top: 0px;
+    opactity: 1;
+  }
+}
+
+
+.expandable-img{
+  transition: scale 500ms;
+  border-radius: 50%;
+  align-self: center;
+  margin-top: 4rem;
+  scale: 1;
+  height: 40vh;
+}
+
+.expandable-img:hover{
+  scale: 1.2;
+}
+

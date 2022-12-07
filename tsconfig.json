@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",                       
+    "module": "umd",      
+    "jsx": "react",               
+    "strict": true,
+    "moduleResolution": "node",                      
+    "esModuleInterop": true,
+    "outDir": "bin",               
+    //No thanks
+    "experimentalDecorators": false,        
+    "emitDecoratorMetadata": false,       
+    "declaration": true,
+    
+  },
+  "include": ["src"]
+}

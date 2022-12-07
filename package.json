@@ -1,0 +1,22 @@
+{
+  "name": "anima",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "docs": "typedoc src/ecs.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "^18.2.0",
+    "react-intersection-observer": "^9.4.1",
+    "react-transition-group": "^4.4.5",
+    "styled-components": "^5.3.6",
+    "typedoc": "^0.23.21",
+    "typescript": "^4.9.3"
+  },
+  "devDependencies": {
+    "@types/react-transition-group": "^4.4.5"
+  }
+}
