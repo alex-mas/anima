@@ -1,64 +1,68 @@
-import React from 'react';
+import React, {
+  ForwardedRef,
+  ForwardRefRenderFunction,
+  FunctionComponent,
+  ReactNode,
+} from "react";
 import { useRef } from "react";
 import { Transition } from "react-transition-group";
-import styled from 'styled-components';
+import styled, { CSSProperties } from "styled-components";
 
-type Props = {
-  text: string,
-  render: boolean,
-  animationDuration: number
-}
-const StyledSpan = styled('span')`
-  position: absolute;
-  width: 40vw;
-  overflow-y:visible;
-  left: max(-23vw, -16rem);
-  text-align: start;
-`;
+type Props<T,P extends { styles: CSSProperties; children: ReactNode }>  = {
+  text: string;
+  render: boolean;
+  animationDuration: number;
+  Node?: ForwardRefRenderFunction<T, P>;
+};
 
-
-export const FadeInAndOutText = ({
+export const FadeInAndOutText = <
+  T extends HTMLElement,
+  P extends { styles: CSSProperties; children: ReactNode }
+>({
   text,
   render,
-  animationDuration
-}: Props)=>{
+  animationDuration,
+  Node = (props, ref) => (
+    <span {...props} ref={ref}>
+      {props.children}
+    </span>
+  ),
+}: Props<T, P>) => {
   const nodeRef = useRef(null);
-  return(
+  return (
     <Transition nodeRef={nodeRef} in={render} timeout={animationDuration}>
-      {(state)=> {
+      {(state) => {
         let styles: any = {
-          top: '50px',
-          opacity: 0
+          top: "50px",
+          opacity: 0,
         };
-        if(state === 'exiting'){
-          styles.bottom = '50px';
+        if (state === "exiting") {
+          styles.bottom = "50px";
           styles.top = undefined;
           styles.opacity = 0;
         }
-        if(state === 'entering'){
-          styles.top = '0px';
-          styles.opacity = 1
-        }
-        if(state === 'entered'){
+        if (state === "entering") {
+          styles.top = "0px";
           styles.opacity = 1;
-          styles.top = '0px';
-          styles.bottom = '0px';
+        }
+        if (state === "entered") {
+          styles.opacity = 1;
+          styles.top = "0px";
+          styles.bottom = "0px";
         }
         return (
-          <StyledSpan
+          //@ts-ignore
+          <Node
             ref={nodeRef}
-            style={{
+            styles={{
               ...styles,
               transition: `top ${animationDuration}ms, bottom ${animationDuration}ms, opacity ${animationDuration}ms`,
             }}
           >
             {text}
-          </StyledSpan>
+          </Node>
         );
-      }
-      }
-  </Transition>
-  )
-}
-
-
+      }}
+    </Transition>
+  );
+};
