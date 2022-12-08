@@ -1,63 +1,47 @@
 import React, {
   ForwardedRef,
-  ForwardRefRenderFunction,
-  FunctionComponent,
-  ReactNode,
+  ForwardRefExoticComponent, ReactNode, useRef
 } from "react";
-import { useRef } from "react";
-import { Transition } from "react-transition-group";
-import styled, { CSSProperties } from "styled-components";
+import { Transition, TransitionStatus } from "react-transition-group";
+import { CSSProperties } from "styled-components";
 
-type Props<T,P extends { styles: CSSProperties; children: ReactNode }>  = {
+export type FadeInNodeProps = { style: CSSProperties; children: ReactNode, state: TransitionStatus };
+type Props<P extends FadeInNodeProps> = {
   text: string;
-  render: boolean;
-  animationDuration: number;
-  Node?: ForwardRefRenderFunction<T, P>;
+  display: boolean;
+  duration: number;
+  Node?: ForwardRefExoticComponent<P>;
 };
 
+
+const defaultNodeRenderer = React.forwardRef((props: any, ref: ForwardedRef<HTMLSpanElement>) => (
+  <span {...props} ref={ref}>
+    {props.children}
+  </span>
+));
+
 export const FadeInAndOutText = <
-  T extends HTMLElement,
-  P extends { styles: CSSProperties; children: ReactNode }
+  P extends FadeInNodeProps,
 >({
   text,
-  render,
-  animationDuration,
-  Node = (props, ref) => (
-    <span {...props} ref={ref}>
-      {props.children}
-    </span>
-  ),
-}: Props<T, P>) => {
+  display,
+  duration,
+  Node = defaultNodeRenderer,
+}: Props<P>) => {
   const nodeRef = useRef(null);
   return (
-    <Transition nodeRef={nodeRef} in={render} timeout={animationDuration}>
+    <Transition nodeRef={nodeRef} in={display} timeout={duration}>
       {(state) => {
-        let styles: any = {
-          top: "50px",
-          opacity: 0,
+        let styles: CSSProperties = {
+          transition: `all ${duration}ms`,
+          opacity: state === "entering" || state === 'entered' ? 1 : 0,
         };
-        if (state === "exiting") {
-          styles.bottom = "50px";
-          styles.top = undefined;
-          styles.opacity = 0;
-        }
-        if (state === "entering") {
-          styles.top = "0px";
-          styles.opacity = 1;
-        }
-        if (state === "entered") {
-          styles.opacity = 1;
-          styles.top = "0px";
-          styles.bottom = "0px";
-        }
         return (
           //@ts-ignore
           <Node
             ref={nodeRef}
-            styles={{
-              ...styles,
-              transition: `top ${animationDuration}ms, bottom ${animationDuration}ms, opacity ${animationDuration}ms`,
-            }}
+            style={styles}
+            state={state}
           >
             {text}
           </Node>

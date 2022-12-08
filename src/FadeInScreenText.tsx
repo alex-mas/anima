@@ -1,7 +1,4 @@
-import React from "react";
-import { ReactNode, useEffect, useRef } from "react";
-import { useInView } from "react-intersection-observer";
-import { Transition } from "react-transition-group";
+import React, { ReactNode, useMemo } from "react";
 import { OnScreenAnimation } from "./OnScreenAnimation";
 
 
@@ -14,10 +11,11 @@ type Props = {
 }
 
 export const FadeInScreenText = ({ delay, duration, children, childProps, timingFunction }: Props) => {
-
+  const before = useMemo(() => ({ opacity: 0 }), []);
+  const after = useMemo(() => ({ opacity: 1 }), []);
   return (<OnScreenAnimation
-    before={{ opacity: 0 }}
-    after={{ opacity: 1 }}
+    before={before}
+    after={after}
     timingFunction={timingFunction}
     rootProps={childProps}
     delay={delay}

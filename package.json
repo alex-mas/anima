@@ -4,21 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "docs": "typedoc src/ecs.ts",
+    "docs": "typedoc ./src/main.tsx",
     "build": "tsc",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
+    "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
     "react-intersection-observer": "^9.4.1",
     "react-transition-group": "^4.4.5",
-    "styled-components": "^5.3.6",
-    "typedoc": "^0.23.21",
-    "typescript": "^4.9.3"
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
+    "typedoc": "^0.23.21",
+    "typescript": "^4.9.3",
     "@babel/core": "^7.20.5",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-essentials": "^6.5.14",

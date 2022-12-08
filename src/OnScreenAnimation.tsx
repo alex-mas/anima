@@ -1,5 +1,4 @@
-import React from 'react';
-import { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { useInView } from "react-intersection-observer";
 import { Transition } from "react-transition-group";
 import { CSSProperties } from 'styled-components';
@@ -43,7 +42,7 @@ export const OnScreenAnimation = ({
           const props = Object.keys(before);
           let styles: CSSProperties = {
             ...(done ? after : before),
-            transition: props.map((s) => `${s} ${duration}ms`).join(','),
+            transition: `all ${duration}ms`, //todo: fix implementation to convert props names into valid css names props.map((s) => `${s} ${duration}ms`).join(','),
             transitionDelay: `${delay}ms`,
             transitionTimingFunction: timingFunction ? timingFunction : undefined
           };
