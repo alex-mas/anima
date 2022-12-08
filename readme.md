@@ -2,4 +2,4 @@ React component animations and transitions Built on top of react-transition-grou
 
 
 # Documentation
-You can see the storybook of the components [here](https://alex-mas.github.io/anima/)
+You can see the storybook of the components [here](https://alex-mas.github.io/anima/storybook-static/)
