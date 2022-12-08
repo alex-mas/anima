@@ -1,1 +1,1 @@
-TBD
+React component animations and transitions Built on top of react-transition-group and styled-components
