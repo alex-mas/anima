@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alex-mas/anima.git"
+  },
   "scripts": {
     "docs": "typedoc ./src/main.tsx",
     "build": "tsc",
@@ -32,5 +36,10 @@
     "@types/react-transition-group": "^4.4.5",
     "babel-loader": "^8.3.0",
     "react-dom": "^18.2.0"
-  }
+  },
+  "keywords": [
+    "react",
+    "transitions",
+    "animations"
+  ]
 }
